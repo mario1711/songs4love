@@ -38,3 +38,8 @@ body {
 ::-webkit-scrollbar {
     display: none;
 }
+
+.titulo{
+    font-family: 'Rubik Scribble';
+    font-size: 5em;
+}
