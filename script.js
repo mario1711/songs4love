@@ -2,7 +2,7 @@
 //////////////////////////               Aqui va lo otro        ////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-localStorage.clear();
+//localStorage.clear();
 
 function createCard(cardContainer, title, spotifyUrl, width, height, revealDateTime) {
   const card = document.createElement("div"); //aqui se crea la caarta
@@ -11,7 +11,7 @@ function createCard(cardContainer, title, spotifyUrl, width, height, revealDateT
 
   const cardId = `card-${title.replace(/\s+/g, "-").toLowerCase()}`; //le anade un id para identificarlo
   const revealDateTimeObject = new Date(revealDateTime); //utiliza la fecha pasada como parametro
-  const isRevealed = localStorage.getItem(cardId) === "true" || Date.now() >= revealDateTimeObject.getTime(); //aqui se crea un boleano para saver si ya esta revalada
+  const isRevealed = localStorage.getItem(cardId) === "true"; //aqui se crea un boleano para saber si ya esta revalada
 
   const cover = document.createElement("div");
   cover.className = "cover";
@@ -42,8 +42,34 @@ function createCard(cardContainer, title, spotifyUrl, width, height, revealDateT
   iframe.frameBorder = "0";
   iframe.allowfullscreen = true;
   iframe.allow =
-    "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+    "autoplay; encrypted-media";
+  ;
   iframe.loading = "lazy";
+
+  /*iframe.addEventListener("load", function () {
+    iframe.contentWindow.addEventListener("play", function () {
+      // Manejar la reproducción aquí
+      console.log("Reproducción iniciada");
+    });
+  });
+
+  window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    const element = document.getElementById('card');
+    const options = {
+      width: '100%',
+      height: '160',
+      uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
+    };
+    const callback = (EmbedController) => {
+      document.querySelectorAll('.episode').forEach(
+        episode => {
+          episode.addEventListener('click', () => {
+            EmbedController.loadUri(episode.dataset.spotifyId)
+          });
+        })
+    };
+    IFrameAPI.createController(element, options, callback);
+  };*/
 
   cardContent.appendChild(iframe);
   card.appendChild(cover);
@@ -73,10 +99,13 @@ function createCard(cardContainer, title, spotifyUrl, width, height, revealDateT
   }
 
   function revealCard() {
-    card.classList.add("revealed");
-    cover.style.opacity = "0";
-    countdownContainer.innerHTML = "Ya revelada";
-    localStorage.setItem(cardId, "true");
+    if (!localStorage.getItem(cardId)) {
+      // Solo revela la tarjeta si no ha sido revelada previamente
+      card.classList.add("revealed");
+      cover.style.opacity = "0";
+      countdownContainer.innerHTML = "Ya revelada";
+      localStorage.setItem(cardId, "true");
+    }
   }
 
   cardContainer.appendChild(card);
@@ -105,7 +134,7 @@ createCard(
   "https://open.spotify.com/embed/track/70LcF31zb1H0PyJoS1Sx1r?utm_source=generator",
   "100%",
   352,
-  "2024-01-01T20:00:00"
+  "2023-12-31T11:30:00"
 );
 //3
 createCard(
