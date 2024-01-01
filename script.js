@@ -134,7 +134,7 @@ createCard(
   "https://open.spotify.com/embed/track/70LcF31zb1H0PyJoS1Sx1r?utm_source=generator",
   "100%",
   352,
-  "2023-12-31T11:30:00"
+  "2024-01-01T20:00:00"
 );
 //3
 createCard(
@@ -194,7 +194,7 @@ createCard(
 createCard(
   cardContainer,
   "Título 11",
-  "https://open.spotify.com/embed/track/1EKZmfqveHKe78Isfk07w4?utm_source=generator",
+  "https://open.spotify.com/embed/track/4FqfHVML025cwjfhAOFbfa?utm_source=generator",
   "100%",
   352,
   "2024-01-08T20:00:00"
